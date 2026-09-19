@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "eastus2"
+    },
+    "baseName": {
+      "value": "auditsensemvp"
+    },
+    "existingManagedIdentityResourceId": {
+      "value": "/subscriptions/bd0252b6-4261-41f8-bb10-68a7f13257dc/resourceGroups/SREH2HUser54_BandB_RG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-hack2hire-H2HUser54"
+    },
+    "sqlAdminPassword": {
+      "value": "ChangeMe!123456"
+    }
+  }
+}

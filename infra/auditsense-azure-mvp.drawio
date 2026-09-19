@@ -1,0 +1,91 @@
+<mxfile host="app.diagrams.net" modified="2026-09-19T00:00:00.000Z" agent="Mozilla/5.0" version="24.7.17">
+  <diagram id="audit-mvp" name="AuditSense Azure MVP">
+    <mxGraphModel dx="1500" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="title" value="AuditSense Azure MVP Architecture" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=22;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="20" width="520" height="40" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="user" value="Auditor / User" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="250" width="140" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="app" value="Azure App Service&#xa;Python Web App + API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="210" width="220" height="160" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="blob" value="Azure Blob Storage&#xa;Uploaded PDFs, scans, Excel" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fee2e2;strokeColor=#dc2626;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="100" width="220" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="docintel" value="Azure AI Document Intelligence&#xa;OCR and extract text" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;strokeColor=#d97706;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="230" width="220" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="openai" value="Azure OpenAI&#xa;Draft findings + anomalies" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e8ff;strokeColor=#7c3aed;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="360" width="220" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sql" value="Azure SQL Database&#xa;Audit cases + approvals + evidence metadata" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f4f6;strokeColor=#6b7280;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="145" width="250" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="kv" value="Azure Key Vault&#xa;Secrets &amp; API credentials" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffedd5;strokeColor=#f59e0b;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="285" width="250" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="appi" value="Application Insights&#xa;Logs, tracing, monitoring" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="900" y="405" width="250" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="entra" value="Microsoft Entra ID&#xa;Optional reviewer access" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#4b5563;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="430" width="220" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_user_app" value="Login / review" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1f2937;strokeWidth=2;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="user" target="app">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_app_blob" value="Upload files" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1f2937;strokeWidth=2;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="app" target="blob">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_blob_app" value="Fetch docs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1f2937;strokeWidth=2;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="blob" target="app">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_app_doc" value="Extract text" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1f2937;strokeWidth=2;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="app" target="docintel">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_doc_app" value="Return OCR" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1f2937;strokeWidth=2;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="docintel" target="app">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_app_openai" value="Prompt + ledger context" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1f2937;strokeWidth=2;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="app" target="openai">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_openai_app" value="Draft findings" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1f2937;strokeWidth=2;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="openai" target="app">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_app_sql" value="Audit metadata" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1f2937;strokeWidth=2;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="app" target="sql">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_app_kv" value="Get secrets" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1f2937;strokeWidth=2;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="app" target="kv">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_app_appi" value="Telemetry" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1f2937;strokeWidth=2;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="app" target="appi">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_app_entra" value="Auth" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1f2937;strokeWidth=2;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="app" target="entra">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

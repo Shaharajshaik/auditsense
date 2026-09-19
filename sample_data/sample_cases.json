@@ -1,0 +1,22 @@
+{
+  "cases": [
+    {
+      "case_id": "CASE-001",
+      "client": "Northwind Retail",
+      "period": "FY2025-Q2",
+      "status": "In Review"
+    },
+    {
+      "case_id": "CASE-002",
+      "client": "BluePeak Logistics",
+      "period": "FY2025-Q2",
+      "status": "Draft"
+    },
+    {
+      "case_id": "CASE-003",
+      "client": "Summit Manufacturing",
+      "period": "FY2025-Q1",
+      "status": "Approved"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AuditSense MVP</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 2rem; background: #f4f7fb; color: #1b2a41; }
+      .container { max-width: 1000px; margin: 0 auto; }
+      .card { background: white; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { padding: 0.8rem; border-bottom: 1px solid #e5e7eb; text-align: left; }
+      textarea { width: 100%; min-height: 120px; padding: 0.8rem; }
+      button { background: #0f6cbd; color: white; border: none; padding: 0.7rem 1rem; border-radius: 8px; cursor: pointer; }
+      h1 { margin-bottom: 0.5rem; }
+      .meta { color: #55657a; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>AuditSense</h1>
+      <p class="meta">Internal audit platform MVP for financial statement analysis and AI-assisted drafting.</p>
+
+      <div class="card">
+        <h2>Current audit cases</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Client</th>
+              <th>Period</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for case in cases %}
+            <tr>
+              <td>{{ case.case_id }}</td>
+              <td>{{ case.client }}</td>
+              <td>{{ case.period }}</td>
+              <td>{{ case.status }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>AI Draft Analysis</h2>
+        <textarea id="documentText">Invoice total does not match ledger amount by $2,500. Review supporting documentation before approval.</textarea>
+        <p><button id="analyzeBtn">Generate draft finding</button></p>
+        <div id="result" class="meta">No analysis yet.</div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('analyzeBtn').addEventListener('click', async function () {
+        const text = document.getElementById('documentText').value;
+        const response = await fetch('/api/analyze', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ case_id: 'CASE-001', document_text: text })
+        });
+
+        const data = await response.json();
+        document.getElementById('result').innerHTML = '<strong>Finding:</strong> ' + data.finding + '<br><strong>Summary:</strong> ' + data.summary;
+      });
+    </script>
+  </body>
+</html>
